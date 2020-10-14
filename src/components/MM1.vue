@@ -7,6 +7,12 @@
             <v-slider label="µ" hint="Service rate" min="1" max="10" step="0.25" v-model="mu"></v-slider>
             <p>µ = {{mu}}</p>
         </v-row>
+            <v-row>
+            <p>\[ \mathbb {E} [W_q] = \tau \frac {\rho} {1 - \rho} \]</p>
+            </v-row>
+            <v-row>
+            <p>\( \tau = \frac 1 \mu \) is the <strong>mean service time</strong></p>
+            </v-row>
     </v-container>
 </template>
 
@@ -15,7 +21,7 @@ import Chart from './Chart.vue'
 import {mm1, functionSeries} from '../common'
 
 function mm1Latency(rho, mu) {
-    return mm1(rho) / rho / mu
+    return mm1(rho) / mu
 }
 
 export default {

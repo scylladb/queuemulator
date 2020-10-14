@@ -17,6 +17,10 @@
           <v-slider label="\( \mu \)" hint="Service rate" min="1" max="10" step="0.25" v-model="mu"></v-slider>
           <p v-text="muFormula"></p>
         </v-row>
+
+        <v-row>
+            <div>\[ \mathbb {E} [W_q] \approx \left( \frac {\rho} {1 - \rho} \right) \left( \frac {\lambda^2 \sigma_s^2 + \mu^2 \sigma_a^2} {2} \right) \mu \]</div>
+        </v-row>
     </v-container>
 </template>
 
