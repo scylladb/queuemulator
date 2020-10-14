@@ -1,4 +1,5 @@
 # queuemulator
+Interactive queueing theory graphs
 
 ## Project setup
 ```
