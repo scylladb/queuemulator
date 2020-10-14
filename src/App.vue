@@ -46,9 +46,6 @@ export default {
     MMC
   },
   watch: {
-    // sigmaService(s) {
-    //   console.log(s)
-    // }
   }
 };
 </script>

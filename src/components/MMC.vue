@@ -11,6 +11,16 @@
           <v-slider label="Workers" hint="workers" min="1" max="10" step="1" v-model="workers"></v-slider>
           <p>Workers = {{workers}}</p>
         </v-row>
+        <v-row>
+            <a href="https://en.wikipedia.org/wiki/M/M/c_queue">MMC model</a>
+        </v-row>
+        <v-row>
+            <p>\[ \mathbb E [W_q] = \frac {\rho}{1-\rho} \text{C} (c, \lambda / \mu) + c \rho \]</p>
+        </v-row>
+        <v-row>
+            <p><a href="https://en.wikipedia.org/wiki/Erlang_(unit)#Erlang_C_formula">The Erlang C function</a></p>
+            <p>\[ {\displaystyle {\text{ C}}(c,\lambda /\mu )={\frac {1}{1+\left(1-\rho \right)\left({\frac {c!}{(c\rho )^{c}}}\right)\sum _{k=0}^{c-1}{\frac {(c\rho )^{k}}{k!}}}}} \]</p>
+        </v-row>
     </v-container>
 </template>
 
@@ -47,10 +57,8 @@ export default {
       return functionSeries(x => mmcLatency(this.workers, x, this.mu), 0, 1, 0.005, 100)
     },
   },
-  updated() {
+  mounted() {
       window.MathJax.typeset()
   },
-  watch: {
-  }
 }
 </script>

@@ -19,7 +19,12 @@
         </v-row>
 
         <v-row>
-            <div>\[ \mathbb {E} [W_q] \approx \left( \frac {\rho} {1 - \rho} \right) \left( \frac {\lambda^2 \sigma_s^2 + \mu^2 \sigma_a^2} {2} \right) \mu \]</div>
+            <p>\[ \mathbb {E} [W_q] \approx \left( \frac {\rho} {1 - \rho} \right) \left( \frac {\lambda^2 \sigma_s^2 + \mu^2 \sigma_a^2} {2} \right) \mu \]</p>
+        </v-row>
+        <v-row>
+            <p>
+            \( \sigma_s , \sigma_a \) are the <strong>standard errors</strong> of the service and arrival rate
+            </p>
         </v-row>
     </v-container>
 </template>
@@ -48,10 +53,18 @@ export default {
         return `\\( \\mu = ${this.mu}\\)`
     }
   },
-  updated() {
-      window.MathJax.typeset()
+  methods: {
+      typeset() {
+          if (window.MathJax) {
+              window.MathJax.typeset()
+          }
+      }
   },
-  watch: {
-  }
-}
+  mounted() {
+      this.typeset()
+  },
+  updated() {
+      this.typeset()
+  },
+ }
 </script>
