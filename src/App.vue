@@ -5,18 +5,18 @@
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
-        <v-row>
-          <v-col>
+      <v-toolbar-title dense>QueueMulator</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-container>
+        <v-row class="d-flex">
+          <v-col colls="2" sm="1">
             <v-subheader>Model</v-subheader>
           </v-col>
-          <v-col>
-            <v-select single-line :items="formulas" label="Models" v-model="formula"></v-select>
+          <v-col colls="6" sm="2">
+            <v-select dense single-line :items="formulas" label="Models" v-model="formula"></v-select>
           </v-col>
         </v-row>
-      </div>
-      
-      <v-spacer></v-spacer>
+      </v-container>
     </v-app-bar>
 
     <v-main>
@@ -36,7 +36,7 @@ export default {
   name: 'App',
   data() {
     return {
-      formula: 'Kingman',
+      formula: 'MM1',
       formulas: ['Kingman', 'MM1', 'MMC']
     }
   },

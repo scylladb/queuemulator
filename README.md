@@ -1,5 +1,5 @@
 # queuemulator
-Interactive queueing theory graphs
+Interactive queueing theory graphs. Play with it [here](http://queuemulator.gh.nukemberg.com/)
 
 ## Project setup
 ```
