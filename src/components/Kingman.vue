@@ -4,16 +4,13 @@
         <Chart name="queue" ylabel="Queueing latency" xlabel="ρ" :data="data"></Chart>
         </v-row>
         <v-row>
-            <p><a href="https://en.wikipedia.org/wiki/Kingman%27s_formula">Kingman's formula</a></p>
-        </v-row>
-        <v-row>
             <v-col>
-                <v-slider label="\( \sigma_\mu \)" hint="Service rate stderr" min="0.01" max="5" step="0.05" v-model="sigmaService"></v-slider>
-                <p>= {{sigmaService}}</p>
+                <v-slider label="\( c_s \)" hint="Service rate variation" min="0.1" max="5" step="0.1" v-model="c_s"></v-slider>
+                <p>= {{c_s}}</p>
             </v-col>
             <v-col>
-                <v-slider label="\( \sigma_\lambda \)" hint="Arrival rate stderr" min="0.01" max="5" step="0.05" v-model="sigmaArrival"></v-slider>
-                <p>= {{sigmaArrival}}</p>
+                <v-slider label="\( c_a \)" hint="Arrival rate variation" min="0.1" max="5" step="0.1" v-model="c_a"></v-slider>
+                <p>= {{c_a}}</p>
             </v-col>
         </v-row>
         <v-row>
@@ -23,7 +20,10 @@
         <v-row>
             <v-col>
                 <v-row>
-                    <p>\[ \mathbb {E} [W_q] \approx \left( \frac {\rho} {1 - \rho} \right) \left( \frac {\lambda^2 \sigma_s^2 + \mu^2 \sigma_a^2} {2} \right) \mu \]</p>
+                    <p><a href="https://en.wikipedia.org/wiki/Kingman%27s_formula">Kingman's formula</a></p>
+                </v-row>
+                <v-row>
+                    <p>\[ \mathbb {E} [W_q] \approx \left( \frac {\rho} {1 - \rho} \right) \left( \frac {c_a^2 + c_s^2} {2} \right) \tau \]</p>
                 </v-row>
             </v-col>
             <v-col>
@@ -39,20 +39,24 @@
                             <td>Utilization</td>
                         </tr>
                         <tr>
-                            <td>\( \mu \)</td>
-                            <td>Service rate mean</td>
-                        </tr>
-                        <tr>
-                            <td>\( \sigma_s \)</td>
-                            <td>Service rate standard deviation</td>
-                        </tr>
-                        <tr>
                             <td>\( \lambda \)</td>
                             <td>Arrival rate mean</td>
                         </tr>
                         <tr>
-                            <td>\( \sigma_a \)</td>
-                            <td>Arrival rate standard deviation</td>
+                            <td>\( \mu \)</td>
+                            <td>Service rate mean</td>
+                        </tr>
+                        <tr>
+                            <td>\( \tau = \frac 1 \mu \)</td>
+                            <td>Service time mean</td>
+                        </tr>
+                        <tr>
+                            <td>\( c_s \)</td>
+                            <td>Service rate coefficient of variation (standard deviation / mean)</td>
+                        </tr>
+                        <tr>
+                            <td>\( c_a \)</td>
+                            <td>Arrival rate coefficient of varation (standard deviation / mean)</td>
                         </tr>
                     </tbody>
                 </v-simple-table>
@@ -66,21 +70,21 @@
 import {functionSeries, mm1} from '../common.js'
 import Chart from './Chart.vue'
 
-function kingman(lambda, mu, sigmaLambda, sigmaMu) {
-    let rho = lambda / mu
-    return mm1(rho) * (sigmaMu**2 * lambda**2 + sigmaLambda**2 * mu**2) / 2 * mu
+function kingman(rho, c_a, c_s, mu) {
+    let tau = 1 / mu
+    return mm1(rho) * (c_a**2 + c_s**2) / 2 * tau
 }
 
 export default {
   components: {Chart},
   data: () => ({
-    sigmaService: 0.1,
-    sigmaArrival: 0.1,
+    c_a: 0.5,
+    c_s: 0.5,
     mu: 1
   }),
   computed: {
     data() {
-      return functionSeries(x => kingman(x * this.mu, this.mu, this.sigmaArrival, this.sigmaService), 0, 1, 0.005, 100)
+      return functionSeries(x => kingman(x, this.c_a, this.c_s, this.mu), 0, 1, 0.01, 100)
     },
     muFormula() {
         return `\\( \\mu = ${this.mu}\\)`

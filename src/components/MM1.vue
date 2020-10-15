@@ -38,7 +38,7 @@
                         </tr>
                         <tr>
                             <td>\( \tau = \frac 1 \mu \)</td>
-                            <td>Mean service time</td>
+                            <td>Service time mean</td>
                         </tr>
                     </tbody>
                 </v-simple-table>
