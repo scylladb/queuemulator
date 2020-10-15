@@ -18,8 +18,38 @@
             <p>\[ \mathbb E [W_q] = \frac {\rho}{1-\rho} \text{C} (c, \lambda / \mu) + c \rho \]</p>
         </v-row>
         <v-row>
-            <p><a href="https://en.wikipedia.org/wiki/Erlang_(unit)#Erlang_C_formula">The Erlang C function</a></p>
-            <p>\[ {\displaystyle {\text{ C}}(c,\lambda /\mu )={\frac {1}{1+\left(1-\rho \right)\left({\frac {c!}{(c\rho )^{c}}}\right)\sum _{k=0}^{c-1}{\frac {(c\rho )^{k}}{k!}}}}} \]</p>
+            <v-col>
+                <p><a href="https://en.wikipedia.org/wiki/Erlang_(unit)#Erlang_C_formula">The Erlang C function</a></p>
+                <p>\[ {\displaystyle {\text{ C}}(c,\lambda /\mu )={\frac {1}{1+\left(1-\rho \right)\left({\frac {c!}{(c\rho )^{c}}}\right)\sum _{k=0}^{c-1}{\frac {(c\rho )^{k}}{k!}}}}} \]</p>
+            </v-col>
+            <v-col>
+                <h3>Legend</h3>
+                <v-simple-table>
+                    <tbody>
+                        <tr>
+                            <td>\( \mathbb E [W_q] \)</td>
+                            <td>Expectation value of wait time; Mean latency</td>
+                        </tr>
+                        <tr>
+                            <td>\( \rho = \frac \lambda \mu \)</td>
+                            <td>Utilization</td>
+                        </tr>
+                        <tr>
+                            <td>\( \mu \)</td>
+                            <td>Service rate mean</td>
+                        </tr>
+                        <tr>
+                            <td>\( \lambda \)</td>
+                            <td>Arrival rate mean</td>
+                        </tr>
+                        <tr>
+                            <td>\( c \)</td>
+                            <td>Number of service centers (workers)</td>
+                        </tr>
+                    </tbody>
+                </v-simple-table>
+            </v-col>
+
         </v-row>
     </v-container>
 </template>

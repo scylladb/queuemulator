@@ -8,13 +8,41 @@
             <p>µ = {{mu}}</p>
         </v-row>
         <v-row>
-            <a href="https://en.wikipedia.org/wiki/M/M/1_queue">The M/M/1 model</a>
-        </v-row>
-        <v-row>
-            <p>\[ \mathbb {E} [W_q] = \tau \frac {\rho} {1 - \rho} \]</p>
-        </v-row>
-        <v-row>
-            <p>\( \tau = \frac 1 \mu \) is the <strong>mean service time</strong></p>
+            <v-col>
+                <v-row>
+                    <a href="https://en.wikipedia.org/wiki/M/M/1_queue">The M/M/1 model</a>
+                </v-row>
+                <v-row>
+                    <p>\[ \mathbb {E} [W_q] = \tau \frac {\rho} {1 - \rho} \]</p>
+                </v-row>
+            </v-col>
+            <v-col>
+                <h3>Legend</h3>
+                <v-simple-table>
+                    <tbody>
+                        <tr>
+                            <td>\( \mathbb E [W_q] \)</td>
+                            <td>Expectation value of wait time; Mean latency</td>
+                        </tr>
+                        <tr>
+                            <td>\( \rho = \frac \lambda \mu \)</td>
+                            <td>Utilization</td>
+                        </tr>
+                        <tr>
+                            <td>\( \mu \)</td>
+                            <td>Service rate mean</td>
+                        </tr>
+                        <tr>
+                            <td>\( \lambda \)</td>
+                            <td>Arrival rate mean</td>
+                        </tr>
+                        <tr>
+                            <td>\( \tau = \frac 1 \mu \)</td>
+                            <td>Mean service time</td>
+                        </tr>
+                    </tbody>
+                </v-simple-table>
+            </v-col>            
         </v-row>
     </v-container>
 </template>

@@ -20,15 +20,45 @@
           <v-slider label="\( \mu \)" hint="Service rate" min="1" max="10" step="0.25" v-model="mu"></v-slider>
           <p v-text="muFormula"></p>
         </v-row>
+        <v-row>
+            <v-col>
+                <v-row>
+                    <p>\[ \mathbb {E} [W_q] \approx \left( \frac {\rho} {1 - \rho} \right) \left( \frac {\lambda^2 \sigma_s^2 + \mu^2 \sigma_a^2} {2} \right) \mu \]</p>
+                </v-row>
+            </v-col>
+            <v-col>
+                <h3>Legend</h3>
+                <v-simple-table>
+                    <tbody>
+                        <tr>
+                            <td>\( \mathbb E [W_q] \)</td>
+                            <td>Expectation value of wait time; Mean latency</td>
+                        </tr>
+                        <tr>
+                            <td>\( \rho = \frac \lambda \mu \)</td>
+                            <td>Utilization</td>
+                        </tr>
+                        <tr>
+                            <td>\( \mu \)</td>
+                            <td>Service rate mean</td>
+                        </tr>
+                        <tr>
+                            <td>\( \sigma_s \)</td>
+                            <td>Service rate standard deviation</td>
+                        </tr>
+                        <tr>
+                            <td>\( \lambda \)</td>
+                            <td>Arrival rate mean</td>
+                        </tr>
+                        <tr>
+                            <td>\( \sigma_a \)</td>
+                            <td>Arrival rate standard deviation</td>
+                        </tr>
+                    </tbody>
+                </v-simple-table>
+            </v-col>
+        </v-row>
 
-        <v-row>
-            <p>\[ \mathbb {E} [W_q] \approx \left( \frac {\rho} {1 - \rho} \right) \left( \frac {\lambda^2 \sigma_s^2 + \mu^2 \sigma_a^2} {2} \right) \mu \]</p>
-        </v-row>
-        <v-row>
-            <p>
-            \( \sigma_s , \sigma_a \) are the <strong>standard errors</strong> of the service and arrival rate
-            </p>
-        </v-row>
     </v-container>
 </template>
 
