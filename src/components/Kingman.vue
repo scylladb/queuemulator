@@ -4,6 +4,9 @@
         <Chart name="queue" ylabel="Queueing latency" xlabel="ρ" :data="data"></Chart>
         </v-row>
         <v-row>
+            <p><a href="https://en.wikipedia.org/wiki/Kingman%27s_formula">Kingman's formula</a></p>
+        </v-row>
+        <v-row>
             <v-col>
                 <v-slider label="\( \sigma_\mu \)" hint="Service rate stderr" min="0.01" max="5" step="0.05" v-model="sigmaService"></v-slider>
                 <p>= {{sigmaService}}</p>
