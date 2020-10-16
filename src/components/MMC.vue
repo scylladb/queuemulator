@@ -15,7 +15,7 @@
             <a href="https://en.wikipedia.org/wiki/M/M/c_queue">MMC model</a>
         </v-row>
         <v-row>
-            <p>\[ \mathbb E [W_q] = \frac {\rho}{1-\rho} \text{C} (c, \lambda / \mu) + c \rho \]</p>
+            <p>\[ \mathbb E [W_q] = \frac { \text{C} (c, \lambda / \mu) } {c \mu - \lambda} \]</p>
         </v-row>
         <v-row>
             <v-col>
@@ -31,7 +31,7 @@
                             <td>Expectation value of wait time; Mean latency</td>
                         </tr>
                         <tr>
-                            <td>\( \rho = \frac \lambda \mu \)</td>
+                            <td>\( \rho = \frac \lambda {c \mu} \)</td>
                             <td>Utilization</td>
                         </tr>
                         <tr>
@@ -55,25 +55,26 @@
 </template>
 
 <script>
-import {functionSeries, factorial} from '../common.js'
+import {functionSeries, factorial} from '../common'
 import Chart from './Chart.vue'
 
-function sumSeries(from, to, func) {
+export function sumSeries(from, to, func) {
     var s = 0
-    for (var i=from; i < to; i++) {
+    for (var i=from; i <= to; i++) {
         s += func(i)
     }
     return s
 }
 
-function erlangC(c, r) {
-    return 1 / (1 + (1 - r)*factorial(c)/((c*r)**c) * sumSeries(0, c - 1, (k) => (c*r)**k/factorial(k)) )
+export function erlangC(c, r) {
+    let X = r**c * c / (factorial(c) * (c - r))
+    let Y = sumSeries(0, c - 1, i => r**i / factorial(i))
+    return X / (X + Y)
 }
 
-function mmcLatency(workers, rho, mu) {
-    let r = rho * workers
-    let lambda = rho * mu * workers
-    return erlangC(workers, r) / (workers * mu - lambda) + 1 / mu
+export function mmcLatency(rho, mu, c) {
+    let lambda = rho * mu * c
+    return erlangC(c, rho*c) / (c * mu - lambda)
 }
 
 export default {
@@ -84,7 +85,7 @@ export default {
   }),
   computed: {
     data() {
-      return functionSeries(x => mmcLatency(this.workers, x, this.mu), 0, 1, 0.005, 100)
+      return functionSeries(x => mmcLatency(x, this.mu, this.workers), 0, 1, 0.005, 100)
     },
   },
   mounted() {
