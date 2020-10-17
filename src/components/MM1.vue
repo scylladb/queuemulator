@@ -64,7 +64,7 @@ export default {
     },
     computed: {
         data() {
-            return functionSeries((r) => mm1Latency(r, this.mu), 0, 1, 0.01, 100)
+            return [{...functionSeries((r) => mm1Latency(r, this.mu), 0, 1, 0.01, 100), name: 'mm1'}]
         }
     },
     mounted() {

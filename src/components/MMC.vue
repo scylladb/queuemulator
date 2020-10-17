@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import {functionSeries, factorial} from '../common'
+import {functionSeries, factorial, mm1} from '../common'
 import Chart from './Chart.vue'
 
 export function sumSeries(from, to, func) {
@@ -85,7 +85,14 @@ export default {
   }),
   computed: {
     data() {
-      return functionSeries(x => mmcLatency(x, this.mu, this.workers), 0, 1, 0.005, 100)
+        let mmcSeries = {...functionSeries(x => mmcLatency(x, this.mu, this.workers), 0, 1, 0.005, 100), name: 'mmc'}
+
+        if (this.workers != 1) {
+           let mm1Series = {...functionSeries(r => mm1(r)/this.mu, 0, 1, 0.005, 100), name: 'mm1'}
+           return [mm1Series, mmcSeries]
+        } else {
+            return [mmcSeries]
+        }
     },
   },
   mounted() {

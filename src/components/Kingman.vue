@@ -84,7 +84,10 @@ export default {
   }),
   computed: {
     data() {
-      return functionSeries(x => kingman(x, this.c_a, this.c_s, this.mu), 0, 1, 0.01, 100)
+      return [{...functionSeries(x => kingman(x, this.c_a, this.c_s, this.mu), 0, 1, 0.01, 100), name: 'kingman'},
+        {...functionSeries(x => kingman(x, 1/Math.sqrt(x*this.mu), 1, this.mu), 0, 1, 0.01, 100), name: 'kingman_mm1'},
+        {...functionSeries(r => mm1(r) / this.mu, 0, 1, 0.01, 100), name: 'mm1'}
+      ]
     },
     muFormula() {
         return `\\( \\mu = ${this.mu}\\)`

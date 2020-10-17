@@ -28,6 +28,6 @@ export function functionSeries(func, start=0, end=1, delta=0.01, ymax=undefined)
         x.push(xmax)
       }
     }
-    return [['x', ...x], ['y', ...y]]
+    return {x, y}
 }
   
