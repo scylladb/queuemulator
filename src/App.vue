@@ -5,18 +5,23 @@
       color="primary"
       dark
     >
-      <v-toolbar-title dense>QueueMulator</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-container>
         <v-row class="d-flex">
-          <v-col colls="2" sm="1">
+        <v-col colls="12" sm="2">
+          <a href="http://www.scylladb.com/">
+            <v-img src="scylla-monster.png" max-height="50" max-width="75" contain></v-img>        
+          </a>
+        </v-col>
+        <v-col colls="12" sm="2">
+        <v-toolbar-title>QueueMulator</v-toolbar-title>
+        </v-col>
+          <v-col colls="12" sm="1">
             <v-subheader>Model</v-subheader>
           </v-col>
-          <v-col colls="6" sm="2">
+          <v-col colls="12" sm="2">
             <v-select dense single-line :items="formulas" label="Models" v-model="formula"></v-select>
           </v-col>
+        <v-spacer></v-spacer>
         </v-row>
-      </v-container>
     </v-app-bar>
 
     <v-main>
